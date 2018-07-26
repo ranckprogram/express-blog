@@ -1,0 +1,8 @@
+<div class="wdxc">
+    <h2>我的相册</h2>
+    <ul>
+        <% for(var i = 0;i < albums.length;i++){ %>
+        <li><a href="/share/detail/<%= albums[i].id %>"><img src="<%= albums[i].src %>"></a></li>
+        <% } %>
+    </ul>
+</div>
