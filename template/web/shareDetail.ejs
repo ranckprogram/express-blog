@@ -147,6 +147,9 @@
 <script>
 	$(document).ready(function () {
 		// 这里是前端做的只能喜欢一次，后端也要做相应处理
+		$('#handleLike').on('click', function (e) {
+			e.preventDefault()
+		})
 		$('#handleLike').one('click', function (e) {
 			e.preventDefault()
 			var url = this.pathname

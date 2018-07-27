@@ -66,14 +66,8 @@
                     <li><a href="/">个人博客模板《绅士》后台管理</a></li>
                 </ul>
             </div>
-            <div class="cloud">
-                <h2>标签云</h2>
-                <ul>
-                    <a href="/">陌上花开</a> <a href="/">校园生活</a> <a href="/">html5</a> <a href="/">SumSung</a> <a href="/">青春</a>
-                    <a href="/">温暖</a> <a href="/">阳光</a> <a href="/">三星</a><a href="/">索尼</a> <a href="/">华维荣耀</a> <a
-                            href="/">三星</a> <a href="/">索尼</a>
-                </ul>
-            </div>
+            <% include components/labelCloud.inc.ejs %>
+
             <% include components/follow.inc.ejs %>
 
         </div>
@@ -89,7 +83,11 @@
                         <li class="view"><%= detail.read %>人已阅读</li>
                     </ul>
                 </div>
-                <div class="tags"><a href="/" target="_blank">个人博客</a> &nbsp; <a href="/" target="_blank">小世界</a></div>
+                <div class="tags">
+                    <% for(var i = 0;i < detail.labels.length;i++){ %>
+                    <a href="/" target="_blank"><%= detail.labels[i].name %></a> &nbsp;
+                    <% } %>
+                </div>
                 <div class="news_about"><strong>简介</strong><%= detail.summary %></div>
                 <div class="news_con">
                     <%= detail.content %>
@@ -97,12 +95,17 @@
             </div>
             <div class="share">
                 <p class="diggit">
-                    <a href="JavaScript:;"> 很赞哦！ </a>(<b id="diggnum"><%= detail.like %></b>)
+                    <a href="/article/like/<%= detail.id %>" id="handleLike"> 很赞哦！ </a>(<b
+                            id="diggnum"><%= detail.like %></b>)
                 </p>
             </div>
             <div class="nextinfo">
-                <p>上一篇：<a href="/news/life/2018-03-13/804.html">作为一个设计师,如果遭到质疑你是否能恪守自己的原则?</a></p>
-                <p>下一篇：<a href="/news/life/">返回列表</a></p>
+                <% if( prev.id ){ %>
+                <p>上一篇：<a href="/article/detail/<%= prev.id %>"><%= prev.title %></a></p>
+                <% } %>
+                <% if( next.id ){ %>
+                <p>下一篇：<a href="/article/detail/<%= next.id %>"><%= next.title %></a></p>
+                <% } %>
             </div>
             <div class="news_pl">
                 <h2>文章评论</h2>
@@ -118,4 +121,23 @@
 </footer>
 <a href="#" class="cd-top">Top</a>
 </body>
+<script>
+	$(document).ready(function () {
+		// 这里是前端做的只能喜欢一次，后端也要做相应处理
+		$('#handleLike').on('click', function (e) {
+			e.preventDefault()
+		})
+		$('#handleLike').one('click', function (e) {
+			e.preventDefault()
+			var url = this.pathname
+			$.get(url, function (data) {
+				if (data.result) {
+					var num = $('#diggnum').text()
+					num++
+					$('#diggnum').text(num)
+				}
+			})
+		})
+	})
+</script>
 </html>
