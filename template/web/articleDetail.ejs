@@ -8,20 +8,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/css/base.css" rel="stylesheet">
     <link href="/css/index.css" rel="stylesheet">
+    <link href="/css/info.css" rel="stylesheet">
     <link href="/css/m.css" rel="stylesheet">
     <script src="/js/jquery.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="/js/comm.js"></script>
+
 </head>
 <body>
 <% include components/nav.inc.ejs %>
 
 <article>
     <aside>
-        <div class="l_box" id="stickMe">
-            <% include components/about.inc.ejs %>
-
-            <% include components/album.inc.ejs %>
-
+        <div class="l_box">
             <div class="search">
                 <form action="/e/search/index.php" method="post" name="searchform" id="searchform">
                     <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字词"
@@ -55,18 +53,63 @@
                     <li><a href="/">个人博客模板《绅士》后台管理</a></li>
                 </ul>
             </div>
-            <div class="links">
-                <h2>友情链接</h2>
+            <div class="tuijian">
+                <h2>点击排行</h2>
                 <ul>
-                    <a href="http://www.yangqq.com">杨青个人博客</a> <a href="http://www.yangqq.com">杨青博客</a>
+                    <li><a href="/">你是什么人便会遇上什么人</a></li>
+                    <li><a href="/">帝国cms 列表页调用子栏目，没有则不显示栏目名称</a></li>
+                    <li><a href="/">第二届 优秀个人博客模板比赛参选活动</a></li>
+                    <li><a href="/">个人博客模板《绅士》后台管理</a></li>
+                    <li><a href="/">你是什么人便会遇上什么人</a></li>
+                    <li><a href="/">帝国cms 列表页调用子栏目，没有则不显示栏目名称</a></li>
+                    <li><a href="/">第二届 优秀个人博客模板比赛参选活动</a></li>
+                    <li><a href="/">个人博客模板《绅士》后台管理</a></li>
+                </ul>
+            </div>
+            <div class="cloud">
+                <h2>标签云</h2>
+                <ul>
+                    <a href="/">陌上花开</a> <a href="/">校园生活</a> <a href="/">html5</a> <a href="/">SumSung</a> <a href="/">青春</a>
+                    <a href="/">温暖</a> <a href="/">阳光</a> <a href="/">三星</a><a href="/">索尼</a> <a href="/">华维荣耀</a> <a
+                            href="/">三星</a> <a href="/">索尼</a>
                 </ul>
             </div>
             <% include components/follow.inc.ejs %>
+
         </div>
     </aside>
-    <div class="r_box">
+    <div class="infosbox">
         <main>
-            <% include components/list.inc.ejs %>
+            <div class="newsview">
+                <h3 class="news_title"><%= detail.title %></h3>
+                <div class="bloginfo">
+                    <ul>
+                        <li class="author">作者：<a href="/"><%= detail.author %></a></li>
+                        <li class="timer">时间：<%= detail.date %></li>
+                        <li class="view"><%= detail.read %>人已阅读</li>
+                    </ul>
+                </div>
+                <div class="tags"><a href="/" target="_blank">个人博客</a> &nbsp; <a href="/" target="_blank">小世界</a></div>
+                <div class="news_about"><strong>简介</strong><%= detail.summary %></div>
+                <div class="news_con">
+                    <%= detail.content %>
+                </div>
+            </div>
+            <div class="share">
+                <p class="diggit">
+                    <a href="JavaScript:;"> 很赞哦！ </a>(<b id="diggnum"><%= detail.like %></b>)
+                </p>
+            </div>
+            <div class="nextinfo">
+                <p>上一篇：<a href="/news/life/2018-03-13/804.html">作为一个设计师,如果遭到质疑你是否能恪守自己的原则?</a></p>
+                <p>下一篇：<a href="/news/life/">返回列表</a></p>
+            </div>
+            <div class="news_pl">
+                <h2>文章评论</h2>
+                <ul>
+                    <div class="gbko"></div>
+                </ul>
+            </div>
         </main>
     </div>
 </article>

@@ -6,22 +6,19 @@
     <meta name="keywords" content="个人博客,杨青个人博客,个人博客模板,杨青"/>
     <meta name="description" content="杨青个人博客，是一个站在web前端设计之路的女程序员个人网站，提供个人博客模板免费资源下载的个人原创网站。"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/css/base.css" rel="stylesheet">
-    <link href="/css/index.css" rel="stylesheet">
-    <link href="/css/m.css" rel="stylesheet">
-    <script src="/js/jquery.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="/js/comm.js"></script>
+    <link href="css/base.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+    <link href="css/m.css" rel="stylesheet">
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/comm.js"></script>
+
 </head>
 <body>
 <% include components/nav.inc.ejs %>
 
 <article>
     <aside>
-        <div class="l_box" id="stickMe">
-            <% include components/about.inc.ejs %>
-
-            <% include components/album.inc.ejs %>
-
+        <div class="l_box">
             <div class="search">
                 <form action="/e/search/index.php" method="post" name="searchform" id="searchform">
                     <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字词"
@@ -55,18 +52,40 @@
                     <li><a href="/">个人博客模板《绅士》后台管理</a></li>
                 </ul>
             </div>
-            <div class="links">
-                <h2>友情链接</h2>
+            <div class="tuijian">
+                <h2>点击排行</h2>
                 <ul>
-                    <a href="http://www.yangqq.com">杨青个人博客</a> <a href="http://www.yangqq.com">杨青博客</a>
+                    <li><a href="/">你是什么人便会遇上什么人</a></li>
+                    <li><a href="/">帝国cms 列表页调用子栏目，没有则不显示栏目名称</a></li>
+                    <li><a href="/">第二届 优秀个人博客模板比赛参选活动</a></li>
+                    <li><a href="/">个人博客模板《绅士》后台管理</a></li>
+                    <li><a href="/">你是什么人便会遇上什么人</a></li>
+                    <li><a href="/">帝国cms 列表页调用子栏目，没有则不显示栏目名称</a></li>
+                    <li><a href="/">第二届 优秀个人博客模板比赛参选活动</a></li>
+                    <li><a href="/">个人博客模板《绅士》后台管理</a></li>
+                </ul>
+            </div>
+            <div class="cloud">
+                <h2>标签云</h2>
+                <ul>
+                    <a href="/">陌上花开</a> <a href="/">校园生活</a> <a href="/">html5</a> <a href="/">SumSung</a> <a href="/">青春</a>
+                    <a href="/">温暖</a> <a href="/">阳光</a> <a href="/">三星</a><a href="/">索尼</a> <a href="/">华维荣耀</a> <a
+                            href="/">三星</a> <a href="/">索尼</a>
                 </ul>
             </div>
             <% include components/follow.inc.ejs %>
+
         </div>
     </aside>
     <div class="r_box">
         <main>
             <% include components/list.inc.ejs %>
+            <div class="pagelist"><a class="allpage"><b>99</b></a>&nbsp;&nbsp;<a href="#" class="curPage">1</a>&nbsp;&nbsp;<a
+                        href="#" onclick="page(2)">2</a>&nbsp;&nbsp;<a href="#" onclick="page(3)">3</a>&nbsp;&nbsp;<a
+                        href="#" onclick="page(4)">4</a>&nbsp;&nbsp;<a href="#" onclick="page(5)">5</a>&nbsp;&nbsp;<a
+                        href="#" onclick="page(6)">6</a>&nbsp;&nbsp;<a href="#" onclick="page(7)">7</a>&nbsp;&nbsp;<a
+                        href="#" onclick="page(8)">8</a>&nbsp;&nbsp;<a href="#" onclick="page(9)">9</a>&nbsp;&nbsp;<a
+                        href="#" onclick="page(2)">下一页</a></div>
         </main>
     </div>
 </article>

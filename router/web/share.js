@@ -1,6 +1,5 @@
 // share 相册
 const express = require('express')
-const _ = require('lodash')
 const async = require('async')
 let db = require('../../lib/db')
 
@@ -28,7 +27,7 @@ module.exports = function () {
 		const id = req.params.id
 		/**
 		 * 这个地方我目前有两个思路
-		 * 1、 组合查询出同一相册的数据，然后合并
+		 * 1、 组合查询出同一相册的数据，然后合并 (当前用的是这种)
 		 * 2、 两次查询，组装;;(涉及到回调嵌套)
 		 * */
 		let sql = `select album_table.id,album_table.name,album_table.time,album_table.describe,album_table.like,album_picture_table.src
