@@ -1,0 +1,7 @@
+<% for(var i = 0 ;i < list.length;i++){ %>
+<li>
+    <i><a href="/article/detail/<%= list[i].id %>"><img src="<%= list[i].src %>"></a></i>
+    <h3><a href="/article/detail/<%= list[i].id %>"><%= list[i].title %></a></h3>
+    <p><%= list[i].summary %></p>
+</li>
+<% } %>

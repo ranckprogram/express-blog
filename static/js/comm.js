@@ -1,6 +1,8 @@
 ﻿$(document).ready(function () {
 
-
+	/**
+	 * nav 默认选中
+	 * */
 	var oH2 = document.getElementById("mnavh");
 	var oUl = document.getElementById("starlist");
 	oH2.onclick = function () {
@@ -16,6 +18,7 @@
 			obj = As[i];
 	}
 	obj.id = 'selected';
+
 
 
 	var new_scroll_position = 0;
@@ -59,6 +62,7 @@
 			$back_to_top.addClass('cd-fade-out');
 		}
 	});
+
 	//smooth scroll to top
 	$back_to_top.on('click', function (event) {
 		event.preventDefault();
@@ -68,17 +72,5 @@
 		);
 	});
 
-	//侧栏固定
-	var Sticky = new hcSticky('aside', {
-		stickTo: 'main',
-		innerTop: 200,
-		followScroll: false,
-		queries: {
-			480: {
-				disable: true,
-				stickTo: 'body'
-			}
-		}
-	});
 
 });

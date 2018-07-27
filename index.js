@@ -25,8 +25,11 @@ app.set('view engine', 'html')
 // 4 路由
 
 
-// 公共组件渲染
-app.use(['/index', '/share/detail'], require('./router/web/components/aboutMe'))
+// 公共组件渲染  => 渲染逻辑【什么页面存在什么组件，什么组件存在于那些页面 => 用配置】
+
+app.use(['/index', '/article'], require('./router/web/components/list'))
+app.use(['/index', '/article', '/share/detail'], require('./router/web/components/category'))
+app.use(['/index', '/share/detail', '/article'], require('./router/web/components/aboutMe'))
 app.use(['/index', '/share/detail'], require('./router/web/components/album'))
 
 
@@ -36,6 +39,7 @@ app.get('/', function (req, res) {
 
 app.use('/index', require('./router/web/index')())
 app.use('/share', require('./router/web/share')())
+app.use('/article', require('./router/web/article')())
 
 
 // 5 静态
