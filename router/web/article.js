@@ -92,7 +92,7 @@ module.exports = function () {
 			result = {
 				result: false,
 				message: '已经设置过like',
-				like: 0
+				ex: '这个我设置了path在逻辑上生效，但是浏览器上没看到'
 			}
 			res.json(result)
 			return
@@ -112,7 +112,7 @@ module.exports = function () {
 					result: true,
 					message: '操作成功'
 				}
-				res.json('ok')
+				res.json(result)
 			}
 		})
 	})

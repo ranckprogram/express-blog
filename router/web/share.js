@@ -7,17 +7,24 @@ let db = require('../../lib/db')
 module.exports = function () {
 	var router = express.Router()
 	router.get('/', function (req, res) {
+		// 同步分页，缺陷没有统计出总条数
+		let page = req.query.page || 1
+		let size = 8
+		let begin = (page - 1) * 8
 		let sql =
 			`select album_table.id,album_table.name,album_table.describe,src 
 			from album_table,album_picture_table
 			where album_table.id = album_picture_table.album_id
 			group by album_picture_table.album_id
-			limit 8`
+			limit ${begin}, ${size} `
 		db.query(sql, function (err, albums) {
 			if (err) {
 				res.sqlError(err)
 			} else {
-				res.render('web/share.ejs', {albums})
+				let metaPage = {
+					page
+				}
+				res.render('web/share.ejs', {albums, metaPage})
 			}
 		})
 	})
@@ -107,7 +114,7 @@ module.exports = function () {
 			} else {
 				res.cookie('like', true, {
 					path: req.originalUrl,
-					maxAge: 20*60*1000  // 20分钟
+					maxAge: 20 * 60 * 1000  // 20分钟
 				})
 				res.json(result)
 			}

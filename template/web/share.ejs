@@ -32,11 +32,12 @@
         </ul>
     </div>
     <div class="pagelist">
-        <a class="allpage"><b>99</b></a>&nbsp;&nbsp;
-        <a href="#" class="curPage">1</a>&nbsp;
-        <a href="#" onclick="page(2)">2</a>
-        &nbsp<a href="#" onclick="page(3)">3</a>
-        <a href="#" onclick="page(2)">下一页</a>
+        <% if(metaPage.page - 1){ %>
+        <a href="/share?page=<%= metaPage.page - 1 %>" class="allpage"><b>上一页</b></a>&nbsp;&nbsp;
+        <% } %>
+        <% if(albums.length === 8){ %>
+        <a href="/share?page=<%= ++metaPage.page %>">下一页</a>
+        <% } %>
     </div>
 </article>
 <footer>

@@ -95,8 +95,8 @@
             </div>
             <div class="share">
                 <p class="diggit">
-                    <a href="/article/like/<%= detail.id %>" id="handleLike"> 很赞哦！ </a>(<b
-                            id="diggnum"><%= detail.like %></b>)
+                    <a href="/article/like/<%= detail.id %>" id="handleLike"> 很赞哦！ </a>
+                    (<b id="diggnum"><%= detail.like %></b>)
                 </p>
             </div>
             <div class="nextinfo">
@@ -127,7 +127,7 @@
 		$('#handleLike').on('click', function (e) {
 			e.preventDefault()
 		})
-		$('#handleLike').one('click', function (e) {
+		$('#handleLike').on('click', function (e) {
 			e.preventDefault()
 			var url = this.pathname
 			$.get(url, function (data) {
