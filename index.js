@@ -29,8 +29,8 @@ app.set('view engine', 'html')
 
 app.use(['/index', '/article'], require('./router/web/components/list'))
 app.use(['/index', '/article', '/share/detail'], require('./router/web/components/category'))
-app.use(['/index', '/share/detail', '/article'], require('./router/web/components/aboutMe'))
-app.use(['/index', '/share/detail'], require('./router/web/components/album'))
+app.use(['/index', '/share/detail', '/article', '/about'], require('./router/web/components/aboutMe'))
+app.use(['/index', '/share/detail','/about'], require('./router/web/components/album'))
 app.use(['/article'], require('./router/web/components/labelCloud'))
 
 
@@ -41,6 +41,7 @@ app.get('/', function (req, res) {
 app.use('/index', require('./router/web/index')())
 app.use('/share', require('./router/web/share')())
 app.use('/article', require('./router/web/article')())
+app.use('/about', require('./router/web/about')())
 
 
 // 5 静态
