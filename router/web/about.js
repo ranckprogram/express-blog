@@ -10,7 +10,6 @@ module.exports = function () {
 			if (err) {
 				res.sqlError(err)
 			} else {
-				console.log(result[0])
 				res.render('web/about.ejs', {
 					about: result[0]
 				})

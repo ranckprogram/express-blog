@@ -1,0 +1,9 @@
+<div class="fenlei">
+    <h2>文章分类</h2>
+    <ul>
+        <% for(var i = 0; i < category.length; i++) { %>
+        <li><a href="/article?category=<%= category[i].category %>"><%= category[i].name %>
+                （<%= category[i]['count(*)'] %>）</a></li>
+        <% } %>
+    </ul>
+</div>

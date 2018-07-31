@@ -22,16 +22,10 @@
 
             <% include components/album.inc.ejs %>
 
-            <% include components/search.inc.ejs%>
+            <% include components/search.inc.ejs %>
 
-            <div class="fenlei">
-                <h2>文章分类</h2>
-                <ul>
-                    <% for(var i = 0; i < category.length; i++) { %>
-                    <li><a href="/"><%= category[i].name %>（<%= category[i]['count(*)'] %>）</a></li>
-                    <% } %>
-                </ul>
-            </div>
+            <% include components/category.inc.ejs %>
+
             <div class="tuijian">
                 <h2>站长推荐</h2>
                 <ul>

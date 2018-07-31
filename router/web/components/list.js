@@ -3,11 +3,21 @@ let db = require('../../../lib/db')
 const async = require('async')
 
 module.exports = function (req, res, next) {
+
+	const category = req.query.category
 	let page = req.query.page || 1
 	let begin = (page - 1) * 10
+
+	let sqlList = `select * from article_table limit ${begin}, 10`
+	let sqlTotal = `select count(*) from article_table `
+	if (category) {
+		sqlList = `select * from article_table where category = ${category} limit ${begin}, 10`
+		sqlTotal = `select count(*) from article_table where category = ${category}`
+	}
+
 	async.parallel({
 		list: function (callback) {
-			db.query(`select * from article_table limit ${begin}, 10`, function (err, list) {
+			db.query(sqlList, function (err, list) {
 				if (err) {
 					res.sqlError(err)
 				} else {
@@ -16,7 +26,7 @@ module.exports = function (req, res, next) {
 			})
 		},
 		total: function (callback) {
-			db.query(`select count(*) from article_table`, function (err, pageCount) {
+			db.query(sqlTotal, function (err, pageCount) {
 				if (err) {
 					res.sqlError(err)
 				} else {
