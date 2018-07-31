@@ -117,5 +117,17 @@ module.exports = function () {
 		})
 	})
 
+	router.post('/search', function (req, res) {
+		const keyWord = req.body.keyboard
+		const sql = `select * from article_table where title LIKE '%${keyWord}%';`
+		db.query(sql, function (err, list) {
+			if (err) {
+				res.sqlError(err)
+			} else {
+				res.render('web/list.ejs', {list})
+			}
+		})
+	})
+
 	return router
 }

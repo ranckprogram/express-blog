@@ -1,5 +1,6 @@
 // 首页
 const express = require('express')
+const db = require('../../lib/db')
 
 module.exports = function () {
 	var router = express.Router()

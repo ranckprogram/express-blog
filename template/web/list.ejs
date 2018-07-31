@@ -6,11 +6,11 @@
     <meta name="keywords" content="个人博客,杨青个人博客,个人博客模板,杨青"/>
     <meta name="description" content="杨青个人博客，是一个站在web前端设计之路的女程序员个人网站，提供个人博客模板免费资源下载的个人原创网站。"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/base.css" rel="stylesheet">
-    <link href="css/index.css" rel="stylesheet">
-    <link href="css/m.css" rel="stylesheet">
-    <script src="js/jquery.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="js/comm.js"></script>
+    <link href="/css/base.css" rel="stylesheet">
+    <link href="/css/index.css" rel="stylesheet">
+    <link href="/css/m.css" rel="stylesheet">
+    <script src="/js/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/js/comm.js"></script>
 
 </head>
 <body>
@@ -19,18 +19,8 @@
 <article>
     <aside>
         <div class="l_box">
-            <div class="search">
-                <form action="/e/search/index.php" method="post" name="searchform" id="searchform">
-                    <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字词"
-                           style="color: rgb(153, 153, 153);"
-                           onfocus="if(value=='请输入关键字词'){this.style.color='#000';value=''}"
-                           onblur="if(value==''){this.style.color='#999';value='请输入关键字词'}" type="text">
-                    <input name="show" value="title" type="hidden">
-                    <input name="tempid" value="1" type="hidden">
-                    <input name="tbname" value="news" type="hidden">
-                    <input name="Submit" class="input_submit" value="搜索" type="submit">
-                </form>
-            </div>
+            <% include components/search.inc.ejs%>
+
             <div class="fenlei">
                 <h2>文章分类</h2>
                 <ul>

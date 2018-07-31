@@ -31,7 +31,7 @@ app.use(['/index', '/article'], require('./router/web/components/list'))
 app.use(['/index', '/article', '/share/detail'], require('./router/web/components/category'))
 app.use(['/index', '/share/detail', '/article', '/about'], require('./router/web/components/aboutMe'))
 app.use(['/index', '/share/detail','/about'], require('./router/web/components/album'))
-app.use(['/article'], require('./router/web/components/labelCloud'))
+app.use(['/index', '/article'], require('./router/web/components/labelCloud'))
 
 
 app.get('/', function (req, res) {
