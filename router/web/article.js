@@ -38,9 +38,6 @@ module.exports = function () {
 				res.sqlError(err)
 			} else {
 				detail.labels = labels
-				// res.render('web/articleDetail.ejs', {
-				// 	detail: detail
-				// })
 				res.detail = detail
 				next()
 			}

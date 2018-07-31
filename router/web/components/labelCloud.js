@@ -6,6 +6,7 @@ module.exports = function (req, res, next) {
 		if (err) {
 			res.sqlError(err)
 		} else {
+			console.log(cloudList)
 			res.locals.cloudList = cloudList
 			next()
 		}

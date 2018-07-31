@@ -5,6 +5,7 @@ const async = require('async')
 module.exports = function (req, res, next) {
 
 	const category = req.query.category
+	const label = req.query.label
 	let page = req.query.page || 1
 	let begin = (page - 1) * 10
 
@@ -15,6 +16,11 @@ module.exports = function (req, res, next) {
 		sqlTotal = `select count(*) from article_table where category = ${category}`
 	}
 
+	if (label) {
+		sqlList = `select * from article_table where labels LIKE '%${label}%' limit ${begin}, 10`
+		sqlTotal = `select count(*) from article_table where labels LIKE '%${label}%'`
+	}
+	console.log(sqlList, sqlTotal)
 	async.parallel({
 		list: function (callback) {
 			db.query(sqlList, function (err, list) {

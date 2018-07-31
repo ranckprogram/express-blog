@@ -1,0 +1,10 @@
+<div class="tuijian">
+    <h2>点击排行</h2>
+    <ul>
+
+        <% for(var i = 0;i < rankList.length;i++){ %>
+        <li><a href="/article/detail/<%= rankList[i].id%>"><%= rankList[i].title%></a></li>
+        <% } %>
+
+    </ul>
+</div>
