@@ -15,6 +15,26 @@ module.exports = function () {
 	 **/
 
 	router.get('/detail/:id', function (req, res, next) {
+		/**
+		 * 阅读量，避免重复阅读处理
+		 * 如果刚才已经读，则不增加，否则增加
+		 * */
+		const id = req.params.id
+		if (req.session.read) {
+			next()
+		} else {
+			db.query(`update article_table set \`read\`= \`read\`+'1' where id=${id} `, function (err, data) {
+				if (err) {
+					res.sqlError(err)
+				} else {
+					req.session.read = true
+					next()
+				}
+			})
+		}
+	})
+
+	router.get('/detail/:id', function (req, res, next) {
 		const id = req.params.id
 		db.query(`select * from article_table where id = ${id}`, function (err, details) {
 			if (err) {
@@ -69,9 +89,9 @@ module.exports = function () {
 				})
 			}
 		}, function (err, results) {
-			if(err ) {
+			if (err) {
 				res.sqlError(err)
-			} else{
+			} else {
 				res.render('web/articleDetail.ejs', {
 					detail: res.detail,
 					prev: results.prev[0] || {},
@@ -85,15 +105,15 @@ module.exports = function () {
 
 	router.get('/like/:id', function (req, res) {
 		let result = {}
-		if (req.cookies.like) {
-			result = {
-				result: false,
-				message: '已经设置过like',
-				ex: '这个我设置了path在逻辑上生效，但是浏览器上没看到'
-			}
-			res.json(result)
-			return
-		}
+		// if (req.cookies.like) {
+		// 	result = {
+		// 		result: false,
+		// 		message: '已经设置过like',
+		// 		ex: '这个我设置了path在逻辑上生效，但是浏览器上没看到'
+		// 	}
+		// 	res.json(result)
+		// 	return
+		// }
 
 		const id = req.params.id
 
@@ -101,10 +121,11 @@ module.exports = function () {
 			if (err) {
 				res.sqlError(err)
 			} else {
-				res.cookie('like', true, {
-					path: req.originalUrl,
-					maxAge: 20 * 60 * 1000  // 20分钟
+				res.cookie('like', 1, {
+					// maxAge: 20 * 60 * 1000,  // 20分钟,
+					path: req.originalUrl
 				})
+				console.log('11111')
 				result = {
 					result: true,
 					message: '操作成功'

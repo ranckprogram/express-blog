@@ -20,7 +20,6 @@ module.exports = function (req, res, next) {
 		sqlList = `select * from article_table where labels LIKE '%${label}%' limit ${begin}, 10`
 		sqlTotal = `select count(*) from article_table where labels LIKE '%${label}%'`
 	}
-	console.log(sqlList, sqlTotal)
 	async.parallel({
 		list: function (callback) {
 			db.query(sqlList, function (err, list) {

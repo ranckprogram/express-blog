@@ -2,7 +2,7 @@ var express = require('express')
 var bodyParser = require('body-parser')
 var multer = require('multer')
 var cookieParser = require('cookie-parser')
-
+var cookieSession = require('cookie-session')
 var multerObj = multer({dest: './static/upload'})
 var consolidate = require('consolidate')
 
@@ -15,6 +15,15 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(multerObj.any())
 app.use(common.resPlus())
 app.use(cookieParser())
+let keys = []
+for (var i = 0; i < 100000; i++) {  // 生成10万个随机字符串
+	keys.push('sessionKey=' + Math.random())
+}
+app.use(cookieSession({
+	name: 'session',
+	keys: keys,
+	maxAge: 20 * 60 * 1000 // 20分钟
+}))
 
 
 // 3 模板
@@ -30,10 +39,9 @@ app.set('view engine', 'html')
 app.use(['/index', '/article'], require('./router/web/components/list'))
 app.use(['/index', '/article', '/share/detail'], require('./router/web/components/category'))
 app.use(['/index', '/share/detail', '/article', '/about'], require('./router/web/components/aboutMe'))
-app.use(['/index', '/share/detail','/about'], require('./router/web/components/album'))
+app.use(['/index', '/share/detail', '/about'], require('./router/web/components/album'))
 app.use(['/index', '/article'], require('./router/web/components/labelCloud'))
 app.use(['/article'], require('./router/web/components/rank'))
-
 
 
 app.get('/', function (req, res) {
