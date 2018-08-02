@@ -21,7 +21,7 @@ for (var i = 0; i < 100000; i++) {  // 生成10万个随机字符串
 }
 app.use(cookieSession({
 	name: 'session',
-	keys: keys,
+	keys: keys,  // secret keys 只能输字符串们千万别数字
 	maxAge: 20 * 60 * 1000 // 20分钟
 }))
 

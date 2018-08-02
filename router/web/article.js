@@ -19,6 +19,7 @@ module.exports = function () {
 		 * 阅读量，避免重复阅读处理
 		 * 如果刚才已经读，则不增加，否则增加
 		 * */
+		req.sessionOptions.path = req.originalUrl
 		const id = req.params.id
 		if (req.session.read) {
 			next()
@@ -105,15 +106,16 @@ module.exports = function () {
 
 	router.get('/like/:id', function (req, res) {
 		let result = {}
-		// if (req.cookies.like) {
-		// 	result = {
-		// 		result: false,
-		// 		message: '已经设置过like',
-		// 		ex: '这个我设置了path在逻辑上生效，但是浏览器上没看到'
-		// 	}
-		// 	res.json(result)
-		// 	return
-		// }
+		if (req.cookies.like) {
+			result = {
+				result: false,
+				message: '已经设置过like',
+				ex: '这个我设置了path在逻辑上生效，但是浏览器上没看到',
+				cookie: req.cookies
+			}
+			res.json(result)
+			return
+		}
 
 		const id = req.params.id
 
@@ -121,11 +123,10 @@ module.exports = function () {
 			if (err) {
 				res.sqlError(err)
 			} else {
-				res.cookie('like', 1, {
-					// maxAge: 20 * 60 * 1000,  // 20分钟,
+				res.cookie('like', 'like', {
+					maxAge: 20 * 60 * 1000,  // 20分钟,
 					path: req.originalUrl
 				})
-				console.log('11111')
 				result = {
 					result: true,
 					message: '操作成功'
