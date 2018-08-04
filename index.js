@@ -53,6 +53,10 @@ app.use('/share', require('./router/web/share')())
 app.use('/article', require('./router/web/article')())
 app.use('/about', require('./router/web/about')())
 
+// 管理后台API
+app.use('/v1', require('./router/admin')())
+
+
 
 // 5 静态
 app.use(express.static('./static'))

@@ -18,6 +18,7 @@ module.exports = function () {
 		/**
 		 * 阅读量，避免重复阅读处理
 		 * 如果刚才已经读，则不增加，否则增加
+		 * 另一种思路： ip（还是要考虑文章id）
 		 * */
 		req.sessionOptions.path = req.originalUrl
 		const id = req.params.id
