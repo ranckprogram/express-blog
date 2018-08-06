@@ -35,9 +35,8 @@ class Album {
 			likeStatement.push(`\`${item}\` Like '%${params.keywords}%'`)
 		})
 		// 这里的模糊查询的关键字，如果要通用也必须设置成参数 temp
-		let sql = `select * from ${this.tableName} where ${likeStatement.join(' or ')} limit ${(params.page - 1)*(params.limit)}, ${params.limit}`
+		let sql = `select * from ${this.tableName} where ${likeStatement.join(' or ')} limit ${(params.page - 1) * (params.limit)}, ${params.limit}`
 		let count = `select count(id) from ${this.tableName} where ${likeStatement.join(' or ')}`
-		console.log(sql)
 		return new Promise(function (resolve, reject) {
 			async.parallel({
 				data: function (callback) {
@@ -70,6 +69,45 @@ class Album {
 				}
 			})
 		})
+	}
+	
+	getDetail (id) {
+		let sql = `select * from ${this.tableName} where id = ${id}`
+		let imgSql = `select album_picture_table.id,album_picture_table.src from ${this.tableName},album_picture_table where album_picture_table.album_id= ${this.tableName}.id`
+		return new Promise(function (resolve, reject) {
+			async.parallel({
+				detail: function (callback) {
+					db.query(sql, function (err, data) {
+						if (err) {
+							console.error(err)
+						} else {
+							callback(null, data)
+						}
+					})
+				},
+				srcList: function (callback) {
+					db.query(imgSql, function (err, data) {
+						if (err) {
+							console.error(err)
+						} else {
+							callback(null, data)
+						}
+					})
+				}
+			}, function (err, result) {
+				if (err) {
+					console.error(err)
+				} else {
+					console.log(result)
+					result.detail[0].srcList = result.srcList
+					let data = {
+						data: result.detail[0]
+					}
+					resolve(data)
+				}
+			})
+		})
+		
 	}
 	
 }

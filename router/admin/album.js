@@ -11,5 +11,12 @@ module.exports = {
 		album.getList(params).then(data => {
 			res.json(data)
 		})
+	},
+	getDetailById (req, res) {
+		const id = req.params.id
+		let album = new Album('album_table')
+		album.getDetail(id).then(data => {
+			res.json(data)
+		})
 	}
 }
