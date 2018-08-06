@@ -1,7 +1,15 @@
+const Album = require('../../model/Album')
+
 module.exports = {
 	getList (req, res) {
-		res.json({
-			ok: true
+		let params = {
+			limit: req.query.limit,
+			page: req.query.page,
+			keywords: req.query.keywords
+		}
+		let album = new Album('album_table')
+		album.getList(params).then(data => {
+			res.json(data)
 		})
 	}
 }
