@@ -73,7 +73,7 @@ class Album {
 	
 	getDetail (id) {
 		let sql = `select * from ${this.tableName} where id = ${id}`
-		let imgSql = `select album_picture_table.id,album_picture_table.src from ${this.tableName},album_picture_table where album_picture_table.album_id= ${this.tableName}.id`
+		let imgSql = `select album_picture_table.id,album_picture_table.src from album_picture_table where album_picture_table.album_id= ${id}`
 		return new Promise(function (resolve, reject) {
 			async.parallel({
 				detail: function (callback) {
