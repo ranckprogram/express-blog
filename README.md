@@ -1,4 +1,4 @@
-这是一个使用express + mysql 写的博客，用于学习和练习node/express 熟悉 相关的常用包，用不同姿势踩踩node的坑
+### 这是一个使用express + mysql 写的博客，用于学习和练习node/express 熟悉 相关的常用包，用不同姿势踩踩node的坑
 
 安装
 ```
