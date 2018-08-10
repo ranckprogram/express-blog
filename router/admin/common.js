@@ -14,15 +14,18 @@ module.exports = {
 					console.error(err)
 				} else {
 					// 存数据库
-					let sql = `insert into picture_table (id,filename,path) values ('', '${titleNameArr[0]}', '${fullPath}')`
-					console.log(sql)
+					let pathArr = fullPath.split('\\')
+					pathArr.shift()
+					let newPath = pathArr.join('/')
+					
+					let sql = `insert into picture_table (id,filename,path) values ('', '${titleNameArr[0]}', '${newPath}')`
 					db.query(sql, function (err, file) {
 						if (err) {
 							console.error(err)
 						} else {
 							let result = {
 								data: {
-									fullPath,
+									fullPath: newPath,
 									name: titleNameArr[0],
 									id: file.insertId
 								}
