@@ -6,6 +6,8 @@
 
 let db = require('../lib/db')
 let async = require('async')
+let moment = require('moment')
+moment.locale('zh-cn')
 
 class Album {
 	constructor (tableName) {
@@ -71,6 +73,11 @@ class Album {
 		})
 	}
 	
+	
+	/**
+	 * 通过ID获取相册详情
+	 * */
+	
 	getDetail (id) {
 		let sql = `select * from ${this.tableName} where id = ${id}`
 		let imgSql = `select album_picture_table.id,album_picture_table.src from album_picture_table where album_picture_table.album_id= ${id}`
@@ -104,6 +111,39 @@ class Album {
 						data: result.detail[0]
 					}
 					resolve(data)
+				}
+			})
+		})
+	}
+	
+	/**
+	 * 创建相册
+	 * */
+	
+	createAlbum (name, describe, srcArr) {
+		var time = moment().format('YYYY-MM-DD')
+		let sql = `insert into ${this.tableName} (id, \`name\`, \`describe\`, \`time\`) VALUES ('', '${name}', '${describe}', '${time}');`
+
+		return new Promise(function (resolve, reject ) {
+			db.query(sql, function (err, albumData) {
+				if (err) {
+					console.error(err)
+				} else {
+					let albumId = albumData.insertId
+					let picLinkSqlHead = `INSERT INTO album_picture_table (id, album_id, pic_id) VALUES`
+					let bodySqlArr = []
+					srcArr.split(',').forEach(picId => {
+						bodySqlArr.push(` ('',${albumId},${picId}) `)
+					})
+					let bodySql = bodySqlArr.join(',')
+					let perfectSql = picLinkSqlHead + bodySql
+					db.query(perfectSql, function (err, picData) {
+						if (err) {
+							console.error(err)
+						} else {
+							resolve(picData)
+						}
+					})
 				}
 			})
 		})

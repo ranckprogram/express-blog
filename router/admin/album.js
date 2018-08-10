@@ -18,5 +18,20 @@ module.exports = {
 		album.getDetail(id).then(data => {
 			res.json(data)
 		})
+	},
+	createAlbum (req, res) {
+		let name = req.body.name
+		let describe = req.body.describe
+		let srcList = req.body.srcList
+		let album = new Album('album_table')
+		album.createAlbum(name, describe, srcList).then(data => {
+			// 成功要不要 提取公共中间件？
+			let result = {
+				data: {
+					message: '添加成功'
+				}
+			}
+			res.json(result)
+		})
 	}
 }
