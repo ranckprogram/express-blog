@@ -17,15 +17,14 @@ module.exports = {
 					let pathArr = fullPath.split('\\')
 					pathArr.shift()
 					let newPath = pathArr.join('/')
-					
-					let sql = `insert into picture_table (id,filename,path) values ('', '${titleNameArr[0]}', '${newPath}')`
+					let sql = `insert into picture_table (id,filename,path) values ('', '${titleNameArr[0]}', '/${newPath}')`
 					db.query(sql, function (err, file) {
 						if (err) {
 							console.error(err)
 						} else {
 							let result = {
 								data: {
-									fullPath: newPath,
+									fullPath: `/${newPath}`,
 									name: titleNameArr[0],
 									id: file.insertId
 								}

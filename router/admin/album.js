@@ -22,7 +22,7 @@ module.exports = {
 	createAlbum (req, res) {
 		let name = req.body.name
 		let describe = req.body.describe
-		let srcList = req.body.srcList
+		let srcList = req.body.fileIdList
 		let album = new Album('album_table')
 		album.createAlbum(name, describe, srcList).then(data => {
 			// 成功要不要 提取公共中间件？
