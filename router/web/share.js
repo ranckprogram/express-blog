@@ -12,15 +12,17 @@ module.exports = function () {
 		let size = 8
 		let begin = (page - 1) * 8
 		let sql =
-			`select album_table.id,album_table.name,album_table.describe,src 
-			from album_table,album_picture_table
-			where album_table.id = album_picture_table.album_id
+			`select album_table.id,album_table.name,album_table.describe,picture_table.path
+			from album_table,album_picture_table,picture_table
+			where album_picture_table.album_id = album_table.id and album_picture_table.pic_id = picture_table.id
 			group by album_picture_table.album_id
+			order by id desc
 			limit ${begin}, ${size} `
 		db.query(sql, function (err, albums) {
 			if (err) {
 				res.sqlError(err)
 			} else {
+				console.log(albums)
 				let metaPage = {
 					page
 				}

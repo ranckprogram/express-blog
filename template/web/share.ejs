@@ -21,7 +21,7 @@
         <ul>
             <% for(var i = 0;i < albums.length;i++){ %>
             <li data-scroll-reveal="enter bottom over 1s">
-                <a href="/share/detail/<%= albums[i].id %>"><i><img src="<%= albums[i].src %>"></i>
+                <a href="/share/detail/<%= albums[i].id %>"><i><img src="<%= albums[i].path %>"></i>
                     <div class="picinfo">
                         <h3><%= albums[i].name %></h3>
                         <span><%= albums[i].describe %></span>
