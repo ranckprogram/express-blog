@@ -22,7 +22,6 @@ module.exports = function () {
 			if (err) {
 				res.sqlError(err)
 			} else {
-				console.log(albums)
 				let metaPage = {
 					page
 				}

@@ -7,7 +7,11 @@ module.exports = function () {
 	
 	router.get('/album/list', require('./album').getList)
 	router.get('/album/:id', require('./album').getDetailById)
-	router.post('/album/add', require('./album').createAlbum)
+	router.post('/album', require('./album').createAlbum)
+	router.put('/album/:id', require('./album').updateAlbum)
+	
+	router.get('/about/', require('./about').getInfo)
+	
 	
 	return router
 }

@@ -33,5 +33,18 @@ module.exports = {
 			}
 			res.json(result)
 		})
+	},
+	updateAlbum (req, res) {
+		const id = req.params.id
+		const params = req.body
+		let album = new Album('album_table')
+		album.updateAlbum(id, params).then(data =>{
+			let result = {
+				data: {
+					message: '添加成功'
+				}
+			}
+			res.json(result)
+		})
 	}
 }
