@@ -10,7 +10,8 @@ module.exports = function () {
 	router.post('/album', require('./album').createAlbum)
 	router.put('/album/:id', require('./album').updateAlbum)
 	
-	router.get('/about/', require('./about').getInfo)
+	router.get('/about', require('./about').getInfo)
+	router.put('/about', require('./about').updateInfo)
 	
 	
 	return router
