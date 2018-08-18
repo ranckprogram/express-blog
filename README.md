@@ -1,4 +1,4 @@
-### 这是一个使用express + mysql 写的博客，用于学习和练习node/express 熟悉 相关的常用包，用不同姿势踩踩node的坑
+这是一个使用express + mysql 写的博客，用于学习和练习node/express 熟悉 相关的常用包，用不同姿势踩踩node的坑
 
 安装
 ```
@@ -33,6 +33,17 @@ node index
 
 
 #### 遇到过的问题
+
+> 使用multer后，接收不到 x-www-form-urlencoded 方式传过来的数据
+
+*解决方式*，前端侯建formdata对象，将数据append
+
+```
+var params = new URLSearchParams()
+for (var attr in this.dataForm) {
+    params.append(attr, this.dataForm[attr])
+}
+```
 
 
 #### 计划优化的问题
