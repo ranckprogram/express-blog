@@ -13,6 +13,8 @@ module.exports = function () {
 	router.get('/about', require('./about').getInfo)
 	router.put('/about', require('./about').updateInfo)
 	
+	router.get('/category/list', require('./article').getCategoryList)
+	
 	
 	return router
 }

@@ -8,8 +8,4 @@ let db = mysql.createPool({
 	database: 'blog'
 });
 
-db.find = function () {
-	
-}
-
 module.exports = db
